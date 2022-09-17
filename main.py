@@ -10,7 +10,7 @@ scale = screen_width / 480
 screen = pygame.display.set_mode((screen_width, screen_width / 480 * 360))
 screen_rect = screen.get_rect()
 
-p1 = player.Player(scale, (100 * scale, 100 * scale))
+p1 = player.Player(scale, (200 * scale, 200 * scale))
 
 def main():
   while True:
