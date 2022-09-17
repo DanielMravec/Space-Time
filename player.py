@@ -1,4 +1,4 @@
-import pygame, math
+import pygame, math, screen_utils
 
 class Player(pygame.sprite.Sprite):
   def __init__(self, scale, pos):
@@ -20,19 +20,14 @@ class Player(pygame.sprite.Sprite):
     if pygame.K_s in pressed_keys:
       self.speed -= 0.1
 
-    if self.speed > 20:
-      self.speed = 20
-    if self.speed < -10:
-      self.speed = -10
+    if self.speed > 10:
+      self.speed = 10
+    if self.speed < -5:
+      self.speed = -5
     
     dir_radians = math.radians(self.dir)
     x = self.speed * math.sin(dir_radians)
     y = -self.speed * math.cos(dir_radians)
 
     self.rect.move_ip((x, y))
-
-    if self.rect.center[0] < 0:
-      self.rect.center = (0, self.rect.center[1])
-    if self.rect.center[1] < 0:
-      self.rect.center = (self.rect.center[0], 0)
-    
+    self.rect = screen_utils.fence_to_screen(self.rect)

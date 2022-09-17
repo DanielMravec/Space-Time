@@ -1,4 +1,4 @@
-import pygame, sys, player
+import pygame, sys, player, screen_utils
 from pygame.locals import QUIT
 
 pygame.init()
@@ -7,10 +7,13 @@ clock = pygame.time.Clock()
 
 screen_info = pygame.display.Info()
 (screen_width, screen_height) = (int(screen_info.current_w), int(screen_info.current_h))
-scale = screen_width / 480
 
-screen = pygame.display.set_mode((screen_width, screen_width / 480 * 360))
+scale = min(screen_height / 360, screen_width / 480)
+
+screen = pygame.display.set_mode((480 * scale, scale * 360))
 screen_rect = screen.get_rect()
+
+screen_utils.init(screen_rect)
 
 p1 = player.Player(scale, (100 * scale, 100 * scale))
 
