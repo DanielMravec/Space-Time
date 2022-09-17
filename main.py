@@ -3,6 +3,8 @@ from pygame.locals import QUIT
 
 pygame.init()
 
+clock = pygame.time.Clock()
+
 screen_info = pygame.display.Info()
 (screen_width, screen_height) = (int(screen_info.current_w), int(screen_info.current_h))
 scale = screen_width / 480
@@ -10,18 +12,29 @@ scale = screen_width / 480
 screen = pygame.display.set_mode((screen_width, screen_width / 480 * 360))
 screen_rect = screen.get_rect()
 
-p1 = player.Player(scale, (200 * scale, 200 * scale))
+p1 = player.Player(scale, (100 * scale, 100 * scale))
+
+pressed_keys = {}
 
 def main():
   while True:
+    clock.tick(60)
     for event in pygame.event.get():
       if event.type == QUIT:
         pygame.quit()
         sys.exit()
+        
+      if event.type == pygame.KEYDOWN:
+        pressed_keys[event.key] = True
+          
+      if event.type == pygame.KEYUP:
+        del pressed_keys[event.key]
+        
+    p1.update(pressed_keys)
+
     screen.fill((255,255,255))
     screen.blit(p1.image, p1.rect)
-    
-    pygame.display.update()
+    pygame.display.flip()
 
 if __name__ == '__main__':
   main()
