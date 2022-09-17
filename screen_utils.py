@@ -7,7 +7,6 @@ def init(screen):
   screen_rect = screen
 
 def fence_to_screen(sprite_rect):
-  print(str(sprite_rect), str(screen_rect))
   rect = sprite_rect.copy()
   if rect.center[0] < 0:
     rect.center = (0, rect.center[1])
