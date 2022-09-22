@@ -6,14 +6,13 @@ def init(screen):
   global screen_rect
   screen_rect = screen
 
-def fence_to_screen(sprite_rect):
-  rect = sprite_rect.copy()
-  if rect.center[0] < 0:
-    rect.center = (0, rect.center[1])
-  if rect.center[1] < 0:
-    rect.center = (rect.center[0], 0)
-  if rect.center[0] > screen_rect.width:
-    rect.center = (screen_rect.width, rect.center[1])
-  if rect.center[1] > screen_rect.height:
-    rect.center = (rect.center[0], screen_rect.height)
-  return rect
+def fence_to_screen(pos):
+  if pos[0] < 0:
+    pos = (0, pos[1])
+  if pos[1] < 0:
+    pos = (pos[0], 0)
+  if pos[0] > screen_rect.width:
+    pos = (screen_rect.width, pos[1])
+  if pos[1] > screen_rect.height:
+    pos = (pos[0], screen_rect.height)
+  return pos
