@@ -14,9 +14,9 @@ scale = min(screen_height / 360, screen_width / 480)
 screen = pygame.display.set_mode((480 * scale, scale * 360), pygame.NOFRAME)
 screen_rect = screen.get_rect()
 
-screen_utils.init(screen_rect)
+screen_utils.init(screen_rect, scale)
 
-p1 = player.Player(scale, (100 * scale, 100 * scale))
+p1 = player.Player((100 * scale, 100 * scale))
 
 pressed_keys = {}
 

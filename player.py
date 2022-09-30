@@ -1,13 +1,12 @@
-import pygame, math, screen_utils
+import pygame, math, screen_utils, sprite
 
 
-class Player(pygame.sprite.Sprite):
-
-    def __init__(self, scale, pos):
+class Player(sprite.Sprite):
+    def __init__(self, pos):
         super().__init__()
         self.orig_image = pygame.image.load('images/P1_4.png').convert_alpha()
         self.orig_image = pygame.transform.smoothscale(
-            self.orig_image, (15 * scale, 13 * scale))
+            self.orig_image, (15 * screen_utils.scale, 13 * screen_utils.scale))
         self.orig_image = pygame.transform.rotate(self.orig_image, 90)
         self.image = self.orig_image
         self.x = pos[0]
@@ -23,14 +22,16 @@ class Player(pygame.sprite.Sprite):
         if pygame.K_a in pressed_keys:
             self.rotate_cw(-5)
         if pygame.K_w in pressed_keys:
-            self.speed += 0.1
+            self.speed += 0.3
         if pygame.K_s in pressed_keys:
-            self.speed -= 0.1
+            self.speed -= 0.3
 
         if self.speed > 5:
             self.speed = 5
         if self.speed < -2:
             self.speed = -2
+
+        self.speed *= 0.95
 
         dir_radians = math.radians(self.dir)
         x = self.speed * math.sin(dir_radians)
