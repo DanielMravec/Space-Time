@@ -1,29 +1,26 @@
-import pygame, math, screen_utils, sprite
+import pygame, screen_utils, sprite
 
 
 class Player(sprite.Sprite):
-    def __init__(self, pos):
-        super().__init__()
-        self.orig_image = pygame.image.load('images/P1_4.png').convert_alpha()
-        self.orig_image = pygame.transform.smoothscale(
-            self.orig_image, (15 * screen_utils.scale, 13 * screen_utils.scale))
-        self.orig_image = pygame.transform.rotate(self.orig_image, 90)
-        self.image = self.orig_image
-        self.x = pos[0]
-        self.y = pos[1]
-        self.rect = self.image.get_rect()
-        self.rect.center = (self.x, self.y)
-        self.dir = 0
+    def __init__(self, pos, size, image_path, keys):
+        image = pygame.image.load(image_path).convert_alpha()
+        image = pygame.transform.smoothscale(
+            image, (size[0] * screen_utils.scale, size[1] * screen_utils.scale))
+        image = pygame.transform.rotate(image, 90)
+      
+        super().__init__(image, pos)
+      
         self.speed = 0
+        self.keys = keys
 
     def update(self, pressed_keys):
-        if pygame.K_d in pressed_keys:
+        if self.keys['right'] in pressed_keys:
             self.rotate_cw(5)
-        if pygame.K_a in pressed_keys:
+        if self.keys['left'] in pressed_keys:
             self.rotate_cw(-5)
-        if pygame.K_w in pressed_keys:
+        if self.keys['forward'] in pressed_keys:
             self.speed += 0.3
-        if pygame.K_s in pressed_keys:
+        if self.keys['backward'] in pressed_keys:
             self.speed -= 0.3
 
         if self.speed > 5:
@@ -33,20 +30,4 @@ class Player(sprite.Sprite):
 
         self.speed *= 0.95
 
-        dir_radians = math.radians(self.dir)
-        x = self.speed * math.sin(dir_radians)
-        y = -self.speed * math.cos(dir_radians)
-
-        self.x += x
-        self.y += y
-
-        (self.x, self.y) = screen_utils.fence_to_screen((self.x, self.y))
-        self.rect.center = (self.x, self.y)
-
-    def rotate_cw(self, degrees):
-        self.dir += degrees
-        old_rect = self.rect
-        self.image = pygame.transform.rotate(self.orig_image, -self.dir)
-        new_rect = self.image.get_rect()
-        new_rect.center = old_rect.center
-        self.rect = new_rect
+        self.move(self.speed)

@@ -16,7 +16,20 @@ screen_rect = screen.get_rect()
 
 screen_utils.init(screen_rect, scale)
 
-p1 = player.Player((100 * scale, 100 * scale))
+p1 = player.Player(
+    (100 * scale, 100 * scale), (15, 13), 'images/P1_4.png', {
+        'left': pygame.K_a,
+        'right': pygame.K_d,
+        'forward': pygame.K_w,
+        'backward': pygame.K_s,
+    })
+p2 = player.Player(
+    (300 * scale, 300 * scale), (18, 15), 'images/P2_2.png', {
+        'left': pygame.K_LEFT,
+        'right': pygame.K_RIGHT,
+        'forward': pygame.K_UP,
+        'backward': pygame.K_DOWN,
+    })
 
 pressed_keys = {}
 
@@ -36,9 +49,11 @@ def main():
                 del pressed_keys[event.key]
 
         p1.update(pressed_keys)
+        p2.update(pressed_keys)
 
         screen.fill((255, 255, 255))
         screen.blit(p1.image, p1.rect)
+        screen.blit(p2.image, p2.rect)
         pygame.display.flip()
 
 
