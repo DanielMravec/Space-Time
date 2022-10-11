@@ -58,8 +58,8 @@ def main():
             })
         p2.update(
             pressed_keys, {
-                'top_speed': 2.5,
-                'slow_speed': -1,
+                'top_speed': 1.5,
+                'slow_speed': -0.5,
                 'acceleration': 1.5,
                 'turn_speed': 1.25,
                 'slowdown_percent': 95.75
