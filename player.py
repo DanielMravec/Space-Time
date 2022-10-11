@@ -1,6 +1,5 @@
 import pygame, screen_utils, sprite
 
-
 class Player(sprite.Sprite):
     def __init__(self, pos, size, image_path, keys):
         image = pygame.image.load(image_path).convert_alpha()
@@ -30,4 +29,4 @@ class Player(sprite.Sprite):
 
         self.speed *= movement['slowdown_percent'] / 100
 
-        self.move(self.speed)
+        self.move(self.speed)\

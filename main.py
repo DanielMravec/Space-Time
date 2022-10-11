@@ -16,15 +16,33 @@ screen_rect = screen.get_rect()
 
 screen_utils.init(screen_rect, scale)
 
+p1_images = {
+    'zero_inertia': 'images/player_imgs/P1_1.png',
+    'titan': 'images/player_imgs/P1_2.png',
+    'glider': 'images/player_imgs/P1_3.png',
+    'borg': 'images/player_imgs/P1_4.png',
+    'dart': 'images/player_imgs/P1_5.png',
+    'balanced': 'images/player_imgs/P1_6.png'
+}
+
+p2_images = {
+    'zero_inertia': 'images/player_imgs/P1_1.png',
+    'titan': 'images/player_imgs/P1_2.png',
+    'glider': 'images/player_imgs/P2_3.png',
+    'borg': 'images/player_imgs/P1_4.png',
+    'dart': 'images/player_imgs/P2_5.png',
+    'balanced': 'images/player_imgs/P2_6.png'
+}
+
 p1 = player.Player(
-    (100 * scale, 100 * scale), (15, 13), 'images/P1_4.png', {
+    (100 * scale, 100 * scale), (15, 13), p1_images['borg'], {
         'left': pygame.K_a,
         'right': pygame.K_d,
         'forward': pygame.K_w,
         'backward': pygame.K_s,
     })
 p2 = player.Player(
-    (300 * scale, 300 * scale), (18, 15), 'images/P2_2.png', {
+    (300 * scale, 300 * scale), (18, 15), p2_images['titan'], {
         'left': pygame.K_LEFT,
         'right': pygame.K_RIGHT,
         'forward': pygame.K_UP,
