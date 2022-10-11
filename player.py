@@ -13,21 +13,21 @@ class Player(sprite.Sprite):
         self.speed = 0
         self.keys = keys
 
-    def update(self, pressed_keys):
+    def update(self, pressed_keys, movement):
         if self.keys['right'] in pressed_keys:
-            self.rotate_cw(5)
+            self.rotate_cw(movement['turn_speed'])
         if self.keys['left'] in pressed_keys:
-            self.rotate_cw(-5)
+            self.rotate_cw(-movement['turn_speed'])
         if self.keys['forward'] in pressed_keys:
-            self.speed += 0.3
+            self.speed += movement['acceleration']
         if self.keys['backward'] in pressed_keys:
-            self.speed -= 0.3
+            self.speed -= movement['acceleration']
 
-        if self.speed > 5:
-            self.speed = 5
-        if self.speed < -2:
-            self.speed = -2
+        if self.speed > movement['top_speed']:
+            self.speed = movement['top_speed']
+        if self.speed < movement['slow_speed']:
+            self.speed = movement['slow_speed']
 
-        self.speed *= 0.95
+        self.speed *= movement['slowdown_percent'] / 100
 
         self.move(self.speed)

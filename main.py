@@ -48,8 +48,22 @@ def main():
             if event.type == pygame.KEYUP:
                 del pressed_keys[event.key]
 
-        p1.update(pressed_keys)
-        p2.update(pressed_keys)
+        p1.update(
+            pressed_keys, {
+                'top_speed': 5,
+                'slow_speed': -2,
+                'acceleration': 3,
+                'turn_speed': 3,
+                'slowdown_percent': 95.65
+            })
+        p2.update(
+            pressed_keys, {
+                'top_speed': 2.5,
+                'slow_speed': -1,
+                'acceleration': 1.5,
+                'turn_speed': 1.25,
+                'slowdown_percent': 95.75
+            })
 
         screen.fill((255, 255, 255))
         screen.blit(p1.image, p1.rect)
