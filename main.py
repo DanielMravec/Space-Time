@@ -50,9 +50,9 @@ ship_configs = [
                slowdown_percent=95,
                costumes=[
                    CostumeConfig(path='images/player_imgs/P1_3.png',
-                                 size=(7, 4)),
+                                 size=(15, 10)),
                    CostumeConfig(path='images/player_imgs/P2_3.png',
-                                 size=(7, 4))
+                                 size=(15, 10))
                ])
 ]
 
