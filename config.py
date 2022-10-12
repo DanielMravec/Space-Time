@@ -11,8 +11,8 @@ class CostumeConfig:
 @dataclass
 class ShipConfig:
     name: str
-    costume: CostumeConfig
-    top_speed: float = 10
+    costumes: List[CostumeConfig]
+    top_speed: float
     slow_speed: float
     acceleration: float
     turn_speed: float
@@ -29,5 +29,5 @@ class PlayerKeysConfig:
 
 @dataclass
 class PlayerConfig:
-    ships: List[ShipConfig]
+    player_index: int
     keys: PlayerKeysConfig

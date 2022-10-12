@@ -3,15 +3,17 @@ import pygame, screen_utils, sprite
 
 class Player(sprite.Sprite):
 
-    def __init__(self, pos, config):
+    def __init__(self, pos, config, ship_config):
         self.config = config
-        self.ship_config = config.ships[0]
+        self.ship_config = ship_config
         self.keys = config.keys
-        image = pygame.image.load(
-            self.ship_config.costume.path).convert_alpha()
+
+        costume = self.ship_config.costumes[self.config.player_index]
+
+        image = pygame.image.load(costume.path).convert_alpha()
         image = pygame.transform.smoothscale(
-            image, (self.ship_config.costume.size[0] * screen_utils.scale,
-                    self.ship_config.costume.size[1] * screen_utils.scale))
+            image, (costume.size[0] * screen_utils.scale,
+                    costume.size[1] * screen_utils.scale))
         image = pygame.transform.rotate(image, 90)
 
         super().__init__(image, pos)

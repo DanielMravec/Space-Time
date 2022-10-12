@@ -17,42 +17,51 @@ screen_rect = screen.get_rect()
 
 screen_utils.init(screen_rect, scale)
 
+ship_configs = [
+    ShipConfig(name='borg',
+               top_speed=5,
+               slow_speed=-2,
+               acceleration=3,
+               turn_speed=3,
+               slowdown_percent=95.65,
+               costumes=[
+                   CostumeConfig(path='images/player_imgs/P1_4.png',
+                                 size=(15, 13)),
+                   CostumeConfig(path='images/player_imgs/P1_4.png',
+                                 size=(15, 13))
+               ]),
+    ShipConfig(name='titan',
+               top_speed=1.5,
+               slow_speed=-0.5,
+               acceleration=1.5,
+               turn_speed=1.25,
+               slowdown_percent=95.75,
+               costumes=[
+                   CostumeConfig(path='images/player_imgs/P1_2.png',
+                                 size=(18, 15)),
+                   CostumeConfig(path='images/player_imgs/P1_2.png',
+                                 size=(18, 15))
+               ]),
+]
+
 p1_config = PlayerConfig(
+    player_index=0,
     keys=PlayerKeysConfig(
         left=pygame.K_a,
         right=pygame.K_d,
         forward=pygame.K_w,
         backward=pygame.K_s,
     ),
-    ships=[
-        ShipConfig(name='borg',
-                   top_speed=5,
-                   slow_speed=-2,
-                   acceleration=3,
-                   turn_speed=3,
-                   slowdown_percent=95.65,
-                   costume=CostumeConfig(path='images/player_imgs/P1_4.png',
-                                         size=(15, 13)))
-    ],
 )
 
 p2_config = PlayerConfig(
+    player_index=1,
     keys=PlayerKeysConfig(
         left=pygame.K_LEFT,
         right=pygame.K_RIGHT,
         forward=pygame.K_UP,
         backward=pygame.K_DOWN,
     ),
-    ships=[
-        ShipConfig(name='titan',
-                   top_speed=1.5,
-                   slow_speed=-0.5,
-                   acceleration=1.5,
-                   turn_speed=1.25,
-                   slowdown_percent=95.75,
-                   costume=CostumeConfig(path='images/player_imgs/P1_2.png',
-                                         size=(18, 15)))
-    ],
 )
 
 # p1_images = {
@@ -73,8 +82,8 @@ p2_config = PlayerConfig(
 #     'balanced': 'images/player_imgs/P2_6.png'
 # }
 
-p1 = player.Player((100 * scale, 100 * scale), p1_config)
-p2 = player.Player((300 * scale, 300 * scale), p2_config)
+p1 = player.Player((100 * scale, 100 * scale), p1_config, ship_configs[0])
+p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[1])
 
 pressed_keys = {}
 
