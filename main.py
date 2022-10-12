@@ -38,10 +38,22 @@ ship_configs = [
                slowdown_percent=95.75,
                costumes=[
                    CostumeConfig(path='images/player_imgs/P1_2.png',
-                                 size=(18, 15)),
+                                 size=(21, 17)),
                    CostumeConfig(path='images/player_imgs/P1_2.png',
-                                 size=(18, 15))
+                                 size=(21, 17))
                ]),
+    ShipConfig(name='glider',
+               top_speed=10,
+               slow_speed=-3,
+               acceleration=4,
+               turn_speed=5,
+               slowdown_percent=95,
+               costumes=[
+                   CostumeConfig(path='images/player_imgs/P1_3.png',
+                                 size=(7, 4)),
+                   CostumeConfig(path='images/player_imgs/P2_3.png',
+                                 size=(7, 4))
+               ])
 ]
 
 p1_config = PlayerConfig(
