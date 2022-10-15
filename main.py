@@ -31,8 +31,8 @@ ship_configs = [
                                  size=(15, 13))
                ]),
     ShipConfig(name='titan',
-               top_speed=1.5,
-               slow_speed=-0.5,
+               top_speed=2,
+               slow_speed=-1,
                acceleration=1.5,
                turn_speed=1.25,
                slowdown_percent=95.75,
@@ -47,12 +47,24 @@ ship_configs = [
                slow_speed=-3,
                acceleration=4,
                turn_speed=5,
-               slowdown_percent=95,
+               slowdown_percent=98,
                costumes=[
                    CostumeConfig(path='images/player_imgs/P1_3.png',
-                                 size=(15, 10)),
+                                 size=(15, 11)),
                    CostumeConfig(path='images/player_imgs/P2_3.png',
-                                 size=(15, 10))
+                                 size=(15, 11))
+               ]),
+    ShipConfig(name='zero_inertia',
+               top_speed=5,
+               slow_speed=-2,
+               acceleration=3,
+               turn_speed=3,
+               slowdown_percent=50,
+               costumes=[
+                   CostumeConfig(path='images/player_imgs/P1_1.png',
+                                 size=(11, 9)),
+                   CostumeConfig(path='images/player_imgs/P1_1.png',
+                                 size=(11, 9))
                ])
 ]
 
@@ -95,7 +107,7 @@ p2_config = PlayerConfig(
 # }
 
 p1 = player.Player((100 * scale, 100 * scale), p1_config, ship_configs[0])
-p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[1])
+p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[3])
 
 pressed_keys = {}
 
