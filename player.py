@@ -1,4 +1,4 @@
-import pygame, screen_utils, sprite
+import pygame, screen_utils, sprite, bullet
 
 
 class Player(sprite.Sprite):
@@ -7,18 +7,15 @@ class Player(sprite.Sprite):
         self.config = config
         self.ship_config = ship_config
         self.keys = config.keys
+        self.speed = 0
+        self.bullet_fired_time = 0
 
         costume = self.ship_config.costumes[self.config.player_index]
 
-        image = pygame.image.load(costume.path).convert_alpha()
-        image = pygame.transform.smoothscale(
-            image, (costume.size[0] * screen_utils.scale,
-                    costume.size[1] * screen_utils.scale))
+        image = screen_utils.load_image(costume.path, costume.size)
         image = pygame.transform.rotate(image, 90)
 
         super().__init__(image, pos)
-
-        self.speed = 0
 
     def update(self, pressed_keys):
         if self.keys.right in pressed_keys:
@@ -38,3 +35,9 @@ class Player(sprite.Sprite):
         self.speed *= self.ship_config.slowdown_percent / 100
 
         self.move(self.speed)
+
+        if self.keys.fire in pressed_keys and \
+                pygame.time.get_ticks() >= self.bullet_fired_time + 100:
+            ammo = bullet.Bullet(10, (self.x, self.y), self.dir)
+            ammo.move(10)
+            self.bullet_fired_time = pygame.time.get_ticks()

@@ -1,9 +1,12 @@
 import pygame, screen_utils, math
 
+sprites = []
+
 
 class Sprite(pygame.sprite.Sprite):
 
     def __init__(self, image, pos):
+        global sprites
         super().__init__()
         self.orig_image = image
         self.image = self.orig_image
@@ -12,6 +15,7 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.dir = 0
+        sprites.append(self)
 
     def rotate_cw(self, degrees):
         self.dir += degrees

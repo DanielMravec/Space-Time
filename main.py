@@ -1,4 +1,4 @@
-import pygame, sys, player, screen_utils
+import pygame, sys, player, screen_utils, sprite
 from pygame.locals import QUIT
 from config import PlayerConfig, ShipConfig, CostumeConfig, PlayerKeysConfig
 
@@ -18,74 +18,76 @@ screen_rect = screen.get_rect()
 screen_utils.init(screen_rect, scale)
 
 ship_configs = [
-    ShipConfig(name='borg',
-               top_speed=5,
-               slow_speed=-2,
-               acceleration=3,
-               turn_speed=3,
-               slowdown_percent=95.65,
-               costumes=[
-                   CostumeConfig(path='images/player_imgs/normal/P1_4_r145x144.png',
-                                 size=(15, 13)),
-                   CostumeConfig(path='images/player_imgs/normal/P1_4_r145x144.png',
-                                 size=(15, 13))
-               ]),
-    ShipConfig(name='titan',
-               top_speed=2,
-               slow_speed=-1,
-               acceleration=1.5,
-               turn_speed=1.25,
-               slowdown_percent=95.75,
-               costumes=[
-                   CostumeConfig(path='images/player_imgs/normal/P1_2_r222x222.png',
-                                 size=(21, 17)),
-                   CostumeConfig(path='images/player_imgs/normal/P1_2_r222x222.png',
-                                 size=(21, 17))
-               ]),
-    ShipConfig(name='glider',
-               top_speed=10,
-               slow_speed=-3,
-               acceleration=4,
-               turn_speed=5,
-               slowdown_percent=98,
-               costumes=[
-                   CostumeConfig(path='images/player_imgs/normal/P2_3_r222x222.png',
-                                 size=(15, 11)),
-                   CostumeConfig(path='images/player_imgs/normal/P1_3_r222x222.png',
-                                 size=(15, 11))
-               ]),
-    ShipConfig(name='zero_inertia',
-               top_speed=5,
-               slow_speed=-2,
-               acceleration=3,
-               turn_speed=3,
-               slowdown_percent=50,
-               costumes=[
-                   CostumeConfig(path='images/player_imgs/normal/P1_1_r222x219.png',
-                                 size=(11, 9)),
-                   CostumeConfig(path='images/player_imgs/normal/P1_1_r222x219.png',
-                                 size=(11, 9))
-               ])
+    ShipConfig(
+        name='borg',
+        top_speed=5,
+        slow_speed=-2,
+        acceleration=3,
+        turn_speed=3,
+        slowdown_percent=95.65,
+        costumes=[
+            CostumeConfig(path='images/player_imgs/normal/P1_4_r145x144.png',
+                          size=(15, 13)),
+            CostumeConfig(path='images/player_imgs/normal/P1_4_r145x144.png',
+                          size=(15, 13))
+        ]),
+    ShipConfig(
+        name='titan',
+        top_speed=2,
+        slow_speed=-1,
+        acceleration=1.5,
+        turn_speed=1.25,
+        slowdown_percent=95.75,
+        costumes=[
+            CostumeConfig(path='images/player_imgs/normal/P1_2_r222x222.png',
+                          size=(21, 17)),
+            CostumeConfig(path='images/player_imgs/normal/P1_2_r222x222.png',
+                          size=(21, 17))
+        ]),
+    ShipConfig(
+        name='glider',
+        top_speed=10,
+        slow_speed=-3,
+        acceleration=4,
+        turn_speed=5,
+        slowdown_percent=98,
+        costumes=[
+            CostumeConfig(path='images/player_imgs/normal/P2_3_r222x222.png',
+                          size=(15, 11)),
+            CostumeConfig(path='images/player_imgs/normal/P1_3_r222x222.png',
+                          size=(15, 11))
+        ]),
+    ShipConfig(
+        name='zero_inertia',
+        top_speed=5,
+        slow_speed=-2,
+        acceleration=3,
+        turn_speed=3,
+        slowdown_percent=50,
+        costumes=[
+            CostumeConfig(path='images/player_imgs/normal/P1_1_r222x219.png',
+                          size=(11, 9)),
+            CostumeConfig(path='images/player_imgs/normal/P1_1_r222x219.png',
+                          size=(11, 9))
+        ])
 ]
 
 p1_config = PlayerConfig(
     player_index=0,
-    keys=PlayerKeysConfig(
-        left=pygame.K_a,
-        right=pygame.K_d,
-        forward=pygame.K_w,
-        backward=pygame.K_s,
-    ),
+    keys=PlayerKeysConfig(left=pygame.K_a,
+                          right=pygame.K_d,
+                          forward=pygame.K_w,
+                          backward=pygame.K_s,
+                          fire=pygame.K_2),
 )
 
 p2_config = PlayerConfig(
     player_index=1,
-    keys=PlayerKeysConfig(
-        left=pygame.K_LEFT,
-        right=pygame.K_RIGHT,
-        forward=pygame.K_UP,
-        backward=pygame.K_DOWN,
-    ),
+    keys=PlayerKeysConfig(left=pygame.K_LEFT,
+                          right=pygame.K_RIGHT,
+                          forward=pygame.K_UP,
+                          backward=pygame.K_DOWN,
+                          fire=pygame.K_p),
 )
 
 # p1_images = {
@@ -126,12 +128,13 @@ def main():
             if event.type == pygame.KEYUP:
                 del pressed_keys[event.key]
 
-        p1.update(pressed_keys)
-        p2.update(pressed_keys)
+        for sprite_obj in sprite.sprites:
+            sprite_obj.update(pressed_keys)
 
         screen.fill((255, 255, 255))
-        screen.blit(p1.image, p1.rect)
-        screen.blit(p2.image, p2.rect)
+
+        for sprite_obj in sprite.sprites:
+            screen.blit(sprite_obj.image, sprite_obj.rect)
         pygame.display.flip()
 
 

@@ -25,6 +25,7 @@ class PlayerKeysConfig:
     right: int
     forward: int
     backward: int
+    fire: int
 
 
 @dataclass
