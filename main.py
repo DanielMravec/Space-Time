@@ -25,9 +25,9 @@ ship_configs = [
                turn_speed=3,
                slowdown_percent=95.65,
                costumes=[
-                   CostumeConfig(path='images/player_imgs/P1_4.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_4_r145x144.png',
                                  size=(15, 13)),
-                   CostumeConfig(path='images/player_imgs/P1_4.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_4_r145x144.png',
                                  size=(15, 13))
                ]),
     ShipConfig(name='titan',
@@ -37,9 +37,9 @@ ship_configs = [
                turn_speed=1.25,
                slowdown_percent=95.75,
                costumes=[
-                   CostumeConfig(path='images/player_imgs/P1_2.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_2_r222x222.png',
                                  size=(21, 17)),
-                   CostumeConfig(path='images/player_imgs/P1_2.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_2_r222x222.png',
                                  size=(21, 17))
                ]),
     ShipConfig(name='glider',
@@ -49,9 +49,9 @@ ship_configs = [
                turn_speed=5,
                slowdown_percent=98,
                costumes=[
-                   CostumeConfig(path='images/player_imgs/P1_3.png',
+                   CostumeConfig(path='images/player_imgs/normal/P2_3_r222x222.png',
                                  size=(15, 11)),
-                   CostumeConfig(path='images/player_imgs/P2_3.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_3_r222x222.png',
                                  size=(15, 11))
                ]),
     ShipConfig(name='zero_inertia',
@@ -61,9 +61,9 @@ ship_configs = [
                turn_speed=3,
                slowdown_percent=50,
                costumes=[
-                   CostumeConfig(path='images/player_imgs/P1_1.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_1_r222x219.png',
                                  size=(11, 9)),
-                   CostumeConfig(path='images/player_imgs/P1_1.png',
+                   CostumeConfig(path='images/player_imgs/normal/P1_1_r222x219.png',
                                  size=(11, 9))
                ])
 ]
@@ -107,7 +107,7 @@ p2_config = PlayerConfig(
 # }
 
 p1 = player.Player((100 * scale, 100 * scale), p1_config, ship_configs[0])
-p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[3])
+p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[2])
 
 pressed_keys = {}
 
