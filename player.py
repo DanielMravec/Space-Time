@@ -15,7 +15,7 @@ class Player(sprite.Sprite):
         image = screen_utils.load_image(costume.path, costume.size)
         image = pygame.transform.rotate(image, 90)
 
-        super().__init__(image, pos)
+        super().__init__(image, pos, 'player')
 
     def update(self, pressed_keys):
         if self.keys.right in pressed_keys:
@@ -39,5 +39,5 @@ class Player(sprite.Sprite):
         if self.keys.fire in pressed_keys and \
                 pygame.time.get_ticks() >= self.bullet_fired_time + 100:
             ammo = bullet.Bullet(10, (self.x, self.y), self.dir)
-            ammo.move(10)
+            ammo.move(max(self.rect.width, self.rect.height))
             self.bullet_fired_time = pygame.time.get_ticks()

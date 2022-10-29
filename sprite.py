@@ -2,10 +2,9 @@ import pygame, screen_utils, math
 
 sprites = []
 
-
 class Sprite(pygame.sprite.Sprite):
 
-    def __init__(self, image, pos):
+    def __init__(self, image, pos, category):
         global sprites
         super().__init__()
         self.orig_image = image
@@ -15,6 +14,7 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.dir = 0
+        self.category = category
         sprites.append(self)
 
     def rotate_cw(self, degrees):
@@ -27,8 +27,8 @@ class Sprite(pygame.sprite.Sprite):
 
     def move(self, dist):
         dir_radians = math.radians(self.dir)
-        x = self.speed * math.sin(dir_radians)
-        y = -self.speed * math.cos(dir_radians)
+        x = dist * math.sin(dir_radians)
+        y = -dist * math.cos(dir_radians)
 
         self.x += x
         self.y += y

@@ -90,26 +90,8 @@ p2_config = PlayerConfig(
                           fire=pygame.K_p),
 )
 
-# p1_images = {
-#     'zero_inertia': 'images/player_imgs/P1_1.png',
-#     'titan': 'images/player_imgs/P1_2.png',
-#     'glider': 'images/player_imgs/P1_3.png',
-#     'borg': 'images/player_imgs/P1_4.png',
-#     'dart': 'images/player_imgs/P1_5.png',
-#     'balanced': 'images/player_imgs/P1_6.png'
-# }
-
-# p2_images = {
-#     'zero_inertia': 'images/player_imgs/P1_1.png',
-#     'titan': 'images/player_imgs/P1_2.png',
-#     'glider': 'images/player_imgs/P2_3.png',
-#     'borg': 'images/player_imgs/P1_4.png',
-#     'dart': 'images/player_imgs/P2_5.png',
-#     'balanced': 'images/player_imgs/P2_6.png'
-# }
-
 p1 = player.Player((100 * scale, 100 * scale), p1_config, ship_configs[0])
-p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[2])
+p2 = player.Player((300 * scale, 300 * scale), p2_config, ship_configs[1])
 
 pressed_keys = {}
 
