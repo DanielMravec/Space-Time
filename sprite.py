@@ -2,6 +2,7 @@ import pygame, screen_utils, math
 
 sprites = []
 
+
 class Sprite(pygame.sprite.Sprite):
 
     def __init__(self, image, pos, category):
@@ -9,6 +10,7 @@ class Sprite(pygame.sprite.Sprite):
         super().__init__()
         self.orig_image = image
         self.image = self.orig_image
+        self.mask = pygame.mask.from_surface(self.image)
         self.x = pos[0]
         self.y = pos[1]
         self.rect = self.image.get_rect()
@@ -21,6 +23,7 @@ class Sprite(pygame.sprite.Sprite):
         self.dir += degrees
         old_rect = self.rect
         self.image = pygame.transform.rotate(self.orig_image, -self.dir)
+        self.mask = pygame.mask.from_surface(self.image)
         new_rect = self.image.get_rect()
         new_rect.center = old_rect.center
         self.rect = new_rect
@@ -35,3 +38,9 @@ class Sprite(pygame.sprite.Sprite):
 
         (self.x, self.y) = screen_utils.fence_to_screen((self.x, self.y))
         self.rect.center = (self.x, self.y)
+
+    def is_touching_sprite(self, other_sprite):
+        if not pygame.sprite.collide_mask(self, other_sprite) == None:
+            return True
+        else:
+            return False
